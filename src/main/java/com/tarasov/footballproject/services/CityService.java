@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,5 +28,14 @@ public class CityService {
 
     public Optional<City> findCityById(Long id) {
         return cityRepository.findById(id);
+    }
+
+    public List<City> findAllCities() {
+        return cityRepository.findAll();
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        cityRepository.deleteById(id);
     }
 }
