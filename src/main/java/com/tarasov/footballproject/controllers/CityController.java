@@ -1,6 +1,7 @@
 package com.tarasov.footballproject.controllers;
 
 import com.tarasov.footballproject.entities.City;
+import com.tarasov.footballproject.entities.Stadium;
 import com.tarasov.footballproject.services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,14 @@ public class CityController {
 
     @PostMapping("/cities")
     public ResponseEntity<Void> addCity(@RequestBody City city) {
-        cityService.saveCity(city);
+        City savedCity = new City(city.getCityName(), city.getCountryName());
+        List<Stadium> stadiums = city.getStadiums();
+
+        for (Stadium s : stadiums) {
+            savedCity.addStadium(s);
+        }
+
+        cityService.saveCity(savedCity);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
@@ -35,26 +43,20 @@ public class CityController {
 
     @GetMapping("/cities/{id}")
     public ResponseEntity<City> findCityById(@PathVariable Long id) {
-        City city =  cityService.findCityById(id).get();
+        City city = cityService.findCityById(id).get();
         return ResponseEntity.ok(city);
     }
 
     @PutMapping("/cities/{id}")
     public ResponseEntity<City> putCity(@PathVariable Long id, @RequestBody City cityDataForUpdate) {
-        City city = cityService.findCityById(id).get();
-        City updatedCity = new City();
-        updatedCity.setId(city.getId());
-        updatedCity.setCityName(cityDataForUpdate.getCityName());
-        updatedCity.setCountryName(cityDataForUpdate.getCountryName());
-
-        cityService.saveCity(updatedCity);
-        return ResponseEntity.ok(updatedCity);
+        cityService.updateCity(id, cityDataForUpdate);
+        return ResponseEntity.ok(cityDataForUpdate);
     }
 
     @DeleteMapping("cities/{id}")
     public ResponseEntity<String> deleteCity(@PathVariable Long id) {
         cityService.deleteById(id);
 
-        return ResponseEntity.ok("City with id: " + id + " deleted successfully");
+        return ResponseEntity.ok("City with id: " + id + " deleted");
     }
 }

@@ -1,6 +1,10 @@
 package com.tarasov.footballproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "cities")
@@ -16,6 +20,10 @@ public class City {
 
     @Column(name = "country_name")
     private String countryName;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "city", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    private List<Stadium> stadiums;
 
     public City() {
     }
@@ -47,6 +55,22 @@ public class City {
 
     public void setCountryName(String countryName) {
         this.countryName = countryName;
+    }
+
+    public List<Stadium> getStadiums() {
+        return stadiums;
+    }
+
+    public void setStadiums(List<Stadium> stadiums) {
+        this.stadiums = stadiums;
+    }
+
+    public void addStadium(Stadium stadium) {
+        if (stadiums == null) {
+            stadiums = new ArrayList<>();
+        }
+        stadiums.add(stadium);
+        stadium.setCity(this);
     }
 
     @Override
