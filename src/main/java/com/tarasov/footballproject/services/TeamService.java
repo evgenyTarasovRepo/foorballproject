@@ -1,6 +1,7 @@
 package com.tarasov.footballproject.services;
 
-import com.tarasov.footballproject.dto.TeamDTO;
+import com.tarasov.footballproject.dto.get.GetTeamDTO;
+import com.tarasov.footballproject.dto.post.PostTeamDTO;
 import com.tarasov.footballproject.entities.City;
 import com.tarasov.footballproject.entities.Stadium;
 import com.tarasov.footballproject.entities.Team;
@@ -32,26 +33,26 @@ public class TeamService {
     }
 
     @Transactional
-    public Team saveTeam(String cityName, String stadiumName, Team newTeam) {
+    public Team saveTeam(PostTeamDTO postTeamDTO) {
         Team savedTeam = new Team();
-        City city = cityRepository.findCityByCityNameIgnoreCase(cityName);
-        Stadium stadium = stadiumRepository.findStadiumByStadiumNameIgnoreCase(stadiumName);
+        City city = cityRepository.findCityByCityNameIgnoreCase(postTeamDTO.getTeamCity());
+        Stadium stadium = stadiumRepository.findStadiumByStadiumNameIgnoreCase(postTeamDTO.getTeamStadium());
 
-        savedTeam.setTeamName(newTeam.getTeamName());
+        savedTeam.setTeamName(postTeamDTO.getTeamName());
         savedTeam.setCity(city);
         savedTeam.setStadium(stadium);
 
         return teamRepository.save(savedTeam);
     }
 
-    public List<TeamDTO> findAllTeams() {
+    public List<GetTeamDTO> findAllTeams() {
         return teamRepository.findAll()
                 .stream()
                 .map(teamDTOMapper)
                 .collect(Collectors.toList());
     }
 
-    public TeamDTO findTeamById(Long id) {
+    public GetTeamDTO findTeamById(Long id) {
         return teamRepository.findById(id)
                 .map(teamDTOMapper)
                 .get();

@@ -1,24 +1,14 @@
-package com.tarasov.footballproject.dto;
+package com.tarasov.footballproject.dto.post;
 
-public class TeamDTO {
-    private Integer teamId;
+public class PostTeamDTO {
     private String teamName;
     private String teamCity;
     private String teamStadium;
 
-    public TeamDTO(Integer teamId, String teamName, String teamCity, String teamStadium) {
-        this.teamId = teamId;
+    public PostTeamDTO(String teamName, String teamCity, String teamStadium) {
         this.teamName = teamName;
         this.teamCity = teamCity;
         this.teamStadium = teamStadium;
-    }
-
-    public Integer getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(Integer teamId) {
-        this.teamId = teamId;
     }
 
     public String getTeamName() {
