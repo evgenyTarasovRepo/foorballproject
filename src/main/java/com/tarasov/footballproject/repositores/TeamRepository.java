@@ -1,12 +1,16 @@
 package com.tarasov.footballproject.repositores;
 
 import com.tarasov.footballproject.entities.City;
+import com.tarasov.footballproject.entities.Stadium;
+import com.tarasov.footballproject.entities.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CityRepository extends JpaRepository<City, Long> {
-    @Query("select c from City c where c.cityName = ?1")
-    City findCityByCityNameIgnoreCase(String name);
+public interface TeamRepository extends JpaRepository<Team, Long> {
+
+
+
+
 }

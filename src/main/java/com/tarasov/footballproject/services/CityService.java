@@ -23,8 +23,14 @@ public class CityService {
 
 
     @Transactional
-    public City saveCity(City city) {
-        return cityRepository.save(city);
+    public City saveCity(City newCity) {
+        City savedCity = new City(newCity.getCityName(), newCity.getCountryName());
+        List<Stadium> stadiums = newCity.getStadiums();
+
+        for (Stadium s : stadiums) {
+            savedCity.addStadium(s);
+        }
+        return cityRepository.save(savedCity);
     }
 
     public Optional<City> findCityById(Long id) {

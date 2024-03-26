@@ -22,15 +22,8 @@ public class CityController {
     }
 
     @PostMapping("/cities")
-    public ResponseEntity<Void> addCity(@RequestBody City city) {
-        City savedCity = new City(city.getCityName(), city.getCountryName());
-        List<Stadium> stadiums = city.getStadiums();
-
-        for (Stadium s : stadiums) {
-            savedCity.addStadium(s);
-        }
-
-        cityService.saveCity(savedCity);
+    public ResponseEntity<Void> addCity(@RequestBody City newCity) {
+        cityService.saveCity(newCity);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
@@ -48,7 +41,7 @@ public class CityController {
     }
 
     @PutMapping("/cities/{id}")
-    public ResponseEntity<City> putCity(@PathVariable Long id, @RequestBody City cityDataForUpdate) {
+    public ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City cityDataForUpdate) {
         cityService.updateCity(id, cityDataForUpdate);
         return ResponseEntity.ok(cityDataForUpdate);
     }

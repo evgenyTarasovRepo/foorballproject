@@ -25,6 +25,10 @@ public class City {
     @OneToMany(mappedBy = "city", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<Stadium> stadiums;
 
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "city", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+//    private List<Team> teams;
+
     public City() {
     }
 
