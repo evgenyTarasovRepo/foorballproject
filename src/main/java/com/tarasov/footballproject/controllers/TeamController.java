@@ -1,5 +1,6 @@
 package com.tarasov.footballproject.controllers;
 
+import com.tarasov.footballproject.dto.TeamDTO;
 import com.tarasov.footballproject.entities.Team;
 import com.tarasov.footballproject.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,15 @@ public class TeamController {
     }
 
     @GetMapping("/teams")
-    public ResponseEntity<List<Team>> findAllTeams() {
-        List<Team> teams = teamService.findAllTeams();
+    public ResponseEntity<List<TeamDTO>> findAllTeams() {
+        List<TeamDTO> teams = teamService.findAllTeams();
         return ResponseEntity.ok(teams);
     }
 
     @GetMapping("/teams/{id}")
-    public ResponseEntity<Team> findTEamById(@PathVariable Long id) {
-        Team team = teamService.findTeamById(id);
-        return ResponseEntity.ok(team);
+    public ResponseEntity<TeamDTO> findTEamById(@PathVariable Long id) {
+        TeamDTO teamDTO = teamService.findTeamById(id);
+        return ResponseEntity.ok(teamDTO);
     }
 
     @DeleteMapping("/teams/{id}")
@@ -51,4 +52,5 @@ public class TeamController {
 
         return ResponseEntity.ok(team);
     }
+
 }
