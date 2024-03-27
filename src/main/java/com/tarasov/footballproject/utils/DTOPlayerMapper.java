@@ -2,9 +2,11 @@ package com.tarasov.footballproject.utils;
 
 import com.tarasov.footballproject.dto.get.GetPlayerDTO;
 import com.tarasov.footballproject.dto.post.PostPlayerDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
 
+@Service
 public class DTOPlayerMapper implements Function<GetPlayerDTO, PostPlayerDTO> {
     @Override
     public PostPlayerDTO apply(GetPlayerDTO getPlayerDTO) {
