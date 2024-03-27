@@ -30,10 +30,11 @@ public class Team {
     @OneToMany(mappedBy = "team",cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     List<Player> players;
 
+    @OneToOne(mappedBy = "team", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    private Manager manager;
+
     public Team() {
     }
-
-
 
     public Team(String teamName) {
         this.teamName = teamName;
@@ -85,6 +86,14 @@ public class Team {
         }
         players.add(player);
         player.setTeam(this);
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 
     @Override

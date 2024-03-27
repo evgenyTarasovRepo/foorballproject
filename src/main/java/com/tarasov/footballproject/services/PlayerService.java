@@ -30,7 +30,7 @@ public class PlayerService {
 
     public Player savePlayer(PostPlayerDTO postPlayerDTO) {
         Player player = constructPlayer(postPlayerDTO);
-        Team team = teamRepository.findTeamByTeamNameIgnoreCase(postPlayerDTO.getTeamName());
+        Team team = getTeamByName(postPlayerDTO.getTeamName());
 
         player.setTeam(team);
         team.addPlayer(player);
