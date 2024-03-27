@@ -3,6 +3,9 @@ package com.tarasov.footballproject.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "teams")
 public class Team {
@@ -23,6 +26,9 @@ public class Team {
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "stadium_id")
     private Stadium stadium;
+
+    @OneToMany(mappedBy = "team",cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    List<Player> players;
 
     public Team() {
     }
@@ -63,6 +69,22 @@ public class Team {
 
     public void setStadium(Stadium stadium) {
         this.stadium = stadium;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public void addPlayer(Player player) {
+        if (players == null) {
+            players = new ArrayList<>();
+        }
+        players.add(player);
+        player.setTeam(this);
     }
 
     @Override

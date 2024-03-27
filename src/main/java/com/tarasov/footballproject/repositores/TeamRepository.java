@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Long> {
 
-
-
-
+    @Query("select t from Team t where t.teamName = ?1")
+    Team findTeamByTeamNameIgnoreCase(String name);
 }
