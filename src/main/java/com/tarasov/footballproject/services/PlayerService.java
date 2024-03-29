@@ -62,6 +62,7 @@ public class PlayerService {
     public Player updatePlayer(Long id, PostPlayerDTO playerForUpdate) {
         Player updatedPlayer = playerRepository.findById(id).get();
         Team teamForUpdate = getTeamByName(playerForUpdate.getTeamName());
+
         updatedPlayer = constructPlayer(playerForUpdate);
         updatedPlayer.setId(id.intValue());
 
