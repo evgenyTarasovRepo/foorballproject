@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StadiumRepository extends JpaRepository<Stadium, Long> {
+public interface StadiumRepository extends JpaRepository<Stadium, Integer> {
     @Query("select s from Stadium s where s.stadiumName = ?1")
     Stadium findStadiumByStadiumNameIgnoreCase(String name);
 }

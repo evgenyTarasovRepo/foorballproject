@@ -46,20 +46,20 @@ public class ManagerService {
                 .collect(Collectors.toList());
     }
 
-    public GetManagerDTO findManagerById(Long id) {
+    public GetManagerDTO findManagerById(Integer id) {
         return managerRepository.findById(id)
                 .map(managerDTOMapper)
                 .get();
     }
 
-    public void deleteManager(Long id) {
+    public void deleteManager(Integer id) {
         Manager manager = managerRepository.findById(id).get();
         manager.setTeam(null);
 
         managerRepository.delete(manager);
     }
 
-    public Manager updateManager(Long id, PostManagerDTO postManagerDTO) {
+    public Manager updateManager(Integer id, PostManagerDTO postManagerDTO) {
         Manager managerForUpdate = managerRepository.findById(id).get();
         Team teamForUpdate = teamRepository.findTeamByTeamNameIgnoreCase(postManagerDTO.getTeamName());
 

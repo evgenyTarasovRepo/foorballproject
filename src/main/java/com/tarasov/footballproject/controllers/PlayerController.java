@@ -2,7 +2,6 @@ package com.tarasov.footballproject.controllers;
 
 import com.tarasov.footballproject.dto.get.GetPlayerDTO;
 import com.tarasov.footballproject.dto.post.PostPlayerDTO;
-import com.tarasov.footballproject.entities.Player;
 import com.tarasov.footballproject.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,19 +35,19 @@ public class PlayerController {
     }
 
     @GetMapping("/players/{id}")
-    public ResponseEntity<GetPlayerDTO> findPlayerById(@PathVariable Long id) {
+    public ResponseEntity<GetPlayerDTO> findPlayerById(@PathVariable Integer id) {
         GetPlayerDTO playerDTO = playerService.findPlayerById(id);
         return ResponseEntity.ok(playerDTO);
     }
 
     @DeleteMapping("players/{id}")
-    public ResponseEntity<String> deletePlayerById(@PathVariable Long id) {
+    public ResponseEntity<String> deletePlayerById(@PathVariable Integer id) {
         playerService.deletePlayerById(id);
         return ResponseEntity.ok("Player with id: " + id + " was deleted");
     }
 
     @PutMapping("/players/{id}")
-    public ResponseEntity<PostPlayerDTO> updatePlayer(@PathVariable Long id, @RequestBody PostPlayerDTO postPlayerDTO) {
+    public ResponseEntity<PostPlayerDTO> updatePlayer(@PathVariable Integer id, @RequestBody PostPlayerDTO postPlayerDTO) {
         playerService.updatePlayer(id, postPlayerDTO);
         return ResponseEntity.ok(postPlayerDTO);
     }

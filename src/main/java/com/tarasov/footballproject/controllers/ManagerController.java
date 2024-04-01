@@ -31,19 +31,19 @@ public class ManagerController {
     }
 
     @GetMapping("/managers/{id}")
-    public ResponseEntity<GetManagerDTO> findManagerById(@PathVariable Long id) {
+    public ResponseEntity<GetManagerDTO> findManagerById(@PathVariable Integer id) {
         GetManagerDTO manager = managerService.findManagerById(id);
         return ResponseEntity.ok(manager);
     }
 
     @DeleteMapping("/managers/{id}")
-    public ResponseEntity<String> deleteManagerById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteManagerById(@PathVariable Integer id) {
         managerService.deleteManager(id);
         return ResponseEntity.ok("Manager with id: " + id + " was deleted");
     }
 
     @PutMapping("/managers/{id}")
-    public ResponseEntity<PostManagerDTO> updateManager(@PathVariable Long id, @RequestBody PostManagerDTO postManagerDTO) {
+    public ResponseEntity<PostManagerDTO> updateManager(@PathVariable Integer id, @RequestBody PostManagerDTO postManagerDTO) {
         managerService.updateManager(id, postManagerDTO);
         return ResponseEntity.ok(postManagerDTO);
     }

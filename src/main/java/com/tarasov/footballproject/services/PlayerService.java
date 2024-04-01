@@ -45,21 +45,21 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
-    public GetPlayerDTO findPlayerById(Long id) {
+    public GetPlayerDTO findPlayerById(Integer id) {
         return playerRepository.findById(id)
                 .map(playerDTOMapper)
                 .get();
     }
 
     @Transactional
-    public void deletePlayerById(Long id) {
+    public void deletePlayerById(Integer id) {
         Player deletedPlayer = playerRepository.findById(id).get();
         deletedPlayer.setTeam(null);
         playerRepository.deleteById(id);
     }
 
     @Transactional
-    public Player updatePlayer(Long id, PostPlayerDTO playerForUpdate) {
+    public Player updatePlayer(Integer id, PostPlayerDTO playerForUpdate) {
         Player updatedPlayer = playerRepository.findById(id).get();
         Team teamForUpdate = getTeamByName(playerForUpdate.getTeamName());
 

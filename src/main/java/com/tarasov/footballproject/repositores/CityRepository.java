@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CityRepository extends JpaRepository<City, Long> {
+public interface CityRepository extends JpaRepository<City, Integer> {
     @Query("select c from City c where c.cityName = ?1")
     City findCityByCityNameIgnoreCase(String name);
 }

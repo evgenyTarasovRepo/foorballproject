@@ -27,7 +27,7 @@ public class StadiumController {
     }
 
     @GetMapping("/stadiums/{id}")
-    public ResponseEntity<Stadium> findStadiumById(@PathVariable Long id) {
+    public ResponseEntity<Stadium> findStadiumById(@PathVariable Integer id) {
         Stadium stadium = stadiumService.findStadiumById(id).get();
 
         return ResponseEntity.ok(stadium);
@@ -40,14 +40,14 @@ public class StadiumController {
     }
 
     @PutMapping("/stadiums/{id}")
-    public ResponseEntity<Stadium> updateStadium(@PathVariable Long id, @RequestBody Stadium stadiumDataForUpdate) {
+    public ResponseEntity<Stadium> updateStadium(@PathVariable Integer id, @RequestBody Stadium stadiumDataForUpdate) {
 
         stadiumService.updateStadium(id, stadiumDataForUpdate);
         return ResponseEntity.ok(stadiumDataForUpdate);
     }
 
     @DeleteMapping("/stadiums/{id}")
-    public ResponseEntity<String> deleteStadium(@PathVariable Long id) {
+    public ResponseEntity<String> deleteStadium(@PathVariable Integer id) {
         stadiumService.deleteStadium(id);
 
         return ResponseEntity.ok("Stadium " + id + " was deleted@");

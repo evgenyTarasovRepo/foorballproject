@@ -56,7 +56,7 @@ public class TeamService {
                 .collect(Collectors.toList());
     }
 
-    public GetTeamDTO findTeamById(Long id) {
+    public GetTeamDTO findTeamById(Integer id) {
         return teamRepository.findById(id)
                 .map(teamDTOMapper)
                 .get();
@@ -71,7 +71,7 @@ public class TeamService {
     }
 
     @Transactional
-    public void deleteTeamById(Long id) {
+    public void deleteTeamById(Integer id) {
         Team deletedTeam = teamRepository.findById(id).get();
         deletedTeam.setStadium(null);
         deletedTeam.setCity(null);
@@ -80,7 +80,7 @@ public class TeamService {
     }
 
     @Transactional
-    public Team updateTeam(Long id, Team teamForUpdate) {
+    public Team updateTeam(Integer id, Team teamForUpdate) {
         Team updatedTeam = teamRepository.findById(id).get();
         updatedTeam.setTeamName(teamForUpdate.getTeamName());
 

@@ -33,7 +33,7 @@ public class CityService {
         return cityRepository.save(savedCity);
     }
 
-    public Optional<City> findCityById(Long id) {
+    public Optional<City> findCityById(Integer id) {
         return cityRepository.findById(id);
     }
 
@@ -42,7 +42,7 @@ public class CityService {
     }
 
     @Transactional
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         Optional<City> temp = cityRepository.findById(id);
         City city = temp.get();
         city.getStadiums().forEach(stadium -> stadium.setCity(null));
@@ -51,7 +51,7 @@ public class CityService {
     }
 
     @Transactional
-    public City updateCity(Long id, City cityDataForUpdate) {
+    public City updateCity(Integer id, City cityDataForUpdate) {
         City existingCity = cityRepository.findById(id).get();
         existingCity.setCityName(cityDataForUpdate.getCityName());
         existingCity.setCountryName(cityDataForUpdate.getCountryName());

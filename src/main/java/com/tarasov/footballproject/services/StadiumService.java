@@ -26,7 +26,7 @@ public class StadiumService {
         return stadiumRepository.save(stadium);
     }
 
-    public Optional<Stadium> findStadiumById(Long id) {
+    public Optional<Stadium> findStadiumById(Integer id) {
         return stadiumRepository.findById(id);
     }
 
@@ -35,7 +35,7 @@ public class StadiumService {
     }
 
     @Transactional
-    public void deleteStadium(Long id) {
+    public void deleteStadium(Integer id) {
         Optional<Stadium> temp = stadiumRepository.findById(id);
         Stadium deletedStadium = temp.get();
         deletedStadium.setCity(null);
@@ -43,7 +43,7 @@ public class StadiumService {
     }
 
     @Transactional
-    public Stadium updateStadium(Long id, Stadium stadiumForUpdate) {
+    public Stadium updateStadium(Integer id, Stadium stadiumForUpdate) {
         Stadium existingStadium = stadiumRepository.findById(id).get();
         City updatedCity = new City();
 
