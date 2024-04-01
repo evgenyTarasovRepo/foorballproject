@@ -1,6 +1,7 @@
 package com.tarasov.footballproject.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class Team {
     @JoinColumn(name = "stadium_id")
     private Stadium stadium;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "team",cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     List<Player> players;
 

@@ -1,5 +1,6 @@
 package com.tarasov.footballproject.controllers;
 
+import com.tarasov.footballproject.dto.get.GetFullTeamInfoDTO;
 import com.tarasov.footballproject.dto.get.GetTeamDTO;
 import com.tarasov.footballproject.dto.post.PostTeamDTO;
 import com.tarasov.footballproject.entities.Team;
@@ -37,6 +38,12 @@ public class TeamController {
     public ResponseEntity<GetTeamDTO> findTEamById(@PathVariable Long id) {
         GetTeamDTO teamDTO = teamService.findTeamById(id);
         return ResponseEntity.ok(teamDTO);
+    }
+
+    @GetMapping("/team/{id}")
+    public ResponseEntity<GetFullTeamInfoDTO> getFullTeamInfo(@PathVariable Long id) {
+        GetFullTeamInfoDTO fullTeamInfo = teamService.getFullTeamInfo(id);
+        return ResponseEntity.ok(fullTeamInfo);
     }
 
     @DeleteMapping("/teams/{id}")

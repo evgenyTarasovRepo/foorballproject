@@ -1,5 +1,6 @@
 package com.tarasov.footballproject.services;
 
+import com.tarasov.footballproject.dto.get.GetFullTeamInfoDTO;
 import com.tarasov.footballproject.dto.get.GetTeamDTO;
 import com.tarasov.footballproject.dto.post.PostTeamDTO;
 import com.tarasov.footballproject.entities.City;
@@ -8,6 +9,7 @@ import com.tarasov.footballproject.entities.Team;
 import com.tarasov.footballproject.repositores.CityRepository;
 import com.tarasov.footballproject.repositores.StadiumRepository;
 import com.tarasov.footballproject.repositores.TeamRepository;
+import com.tarasov.footballproject.utils.TeamDTOFullTeamMapper;
 import com.tarasov.footballproject.utils.TeamDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,14 +24,16 @@ public class TeamService {
     private CityRepository cityRepository;
     private StadiumRepository stadiumRepository;
     private TeamDTOMapper teamDTOMapper;
+    private TeamDTOFullTeamMapper teamDTOFullTeamMapper;
 
     @Autowired
     public TeamService(TeamRepository teamRepository, CityRepository cityRepository,
-                       StadiumRepository stadiumRepository, TeamDTOMapper teamDTOMapper) {
+                       StadiumRepository stadiumRepository, TeamDTOMapper teamDTOMapper, TeamDTOFullTeamMapper teamDTOFullTeamMapper) {
         this.teamRepository = teamRepository;
         this.cityRepository = cityRepository;
         this.stadiumRepository = stadiumRepository;
         this.teamDTOMapper = teamDTOMapper;
+        this.teamDTOFullTeamMapper = teamDTOFullTeamMapper;
     }
 
     @Transactional
@@ -55,6 +59,14 @@ public class TeamService {
     public GetTeamDTO findTeamById(Long id) {
         return teamRepository.findById(id)
                 .map(teamDTOMapper)
+                .get();
+    }
+
+    public GetFullTeamInfoDTO getFullTeamInfo(Long id) {
+//        GetFullTeamInfoDTO team = teamRepository.getFullTeam(id).map(teamDTOFullTeamMapper).get();
+
+        return teamRepository.getFullTeam(id)
+                .map(teamDTOFullTeamMapper)
                 .get();
     }
 
