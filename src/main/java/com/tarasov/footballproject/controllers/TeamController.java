@@ -4,12 +4,16 @@ import com.tarasov.footballproject.dto.get.GetFullTeamInfoDTO;
 import com.tarasov.footballproject.dto.get.GetTeamDTO;
 import com.tarasov.footballproject.dto.post.PostTeamDTO;
 import com.tarasov.footballproject.entities.Team;
+import com.tarasov.footballproject.exceptions.TeamNotFoundException;
+import com.tarasov.footballproject.exceptions.errorresponse.TeamErrorResponse;
 import com.tarasov.footballproject.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
@@ -41,7 +45,7 @@ public class TeamController {
     }
 
     @GetMapping("/team/{id}")
-    public ResponseEntity<GetFullTeamInfoDTO> getFullTeamInfo(@PathVariable Long id) {
+    public ResponseEntity<GetFullTeamInfoDTO> getFullTeamInfo(@PathVariable Integer id) {
         GetFullTeamInfoDTO fullTeamInfo = teamService.getFullTeamInfo(id);
         return ResponseEntity.ok(fullTeamInfo);
     }
@@ -58,6 +62,17 @@ public class TeamController {
         teamService.updateTeam(id, team);
 
         return ResponseEntity.ok(team);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleTeamException(TeamNotFoundException exc) {
+        TeamErrorResponse exceptionResponse = new TeamErrorResponse();
+
+        exceptionResponse.setStatus(HttpStatus.NOT_FOUND.value());
+        exceptionResponse.setMessage(exc.getMessage());
+        exceptionResponse.setTimeStamp(ZonedDateTime.now(ZoneId.of("Z")));
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
 }

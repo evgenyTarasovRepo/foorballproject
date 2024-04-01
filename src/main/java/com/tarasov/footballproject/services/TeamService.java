@@ -6,6 +6,7 @@ import com.tarasov.footballproject.dto.post.PostTeamDTO;
 import com.tarasov.footballproject.entities.City;
 import com.tarasov.footballproject.entities.Stadium;
 import com.tarasov.footballproject.entities.Team;
+import com.tarasov.footballproject.exceptions.TeamNotFoundException;
 import com.tarasov.footballproject.repositores.CityRepository;
 import com.tarasov.footballproject.repositores.StadiumRepository;
 import com.tarasov.footballproject.repositores.TeamRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,12 +64,17 @@ public class TeamService {
                 .get();
     }
 
-    public GetFullTeamInfoDTO getFullTeamInfo(Long id) {
-//        GetFullTeamInfoDTO team = teamRepository.getFullTeam(id).map(teamDTOFullTeamMapper).get();
+    public GetFullTeamInfoDTO getFullTeamInfo(Integer id) {
+        Optional<Team> team = teamRepository.getFullTeam(id);
+        GetFullTeamInfoDTO teamInfoDTO = null;
+        if (team.isPresent()) {
+            teamInfoDTO = team.map(teamDTOFullTeamMapper).get();
+        }
+        else {
+            throw new TeamNotFoundException("Did not find team with id " + id);
+        }
 
-        return teamRepository.getFullTeam(id)
-                .map(teamDTOFullTeamMapper)
-                .get();
+        return  teamInfoDTO;
     }
 
     @Transactional

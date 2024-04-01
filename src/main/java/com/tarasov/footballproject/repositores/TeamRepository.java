@@ -1,6 +1,7 @@
 package com.tarasov.footballproject.repositores;
 
 import com.tarasov.footballproject.entities.Team;
+import com.tarasov.footballproject.exceptions.TeamNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,5 +20,5 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
             "left join fetch t.city " +
             "left join fetch t.stadium " +
             "where t.id = ?1")
-    Optional<Team> getFullTeam(Long id);
+    Optional<Team> getFullTeam(Integer id) throws TeamNotFoundException;
 }
