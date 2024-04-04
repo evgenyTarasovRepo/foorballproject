@@ -1,5 +1,6 @@
 package com.tarasov.footballproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,26 +14,23 @@ public class Match {
     @Column(name = "match_id")
     private Integer id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd 'T' HH:mm:ss")
     @Column(name = "date_time")
     LocalDateTime matchDateTime;
 
-    @Column(name = "home_team_id")
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "home_team_id")
     private Team homeTeam;
 
-    @Column(name = "away_team_id")
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "away_team_id")
     private Team awayTeam;
-
-    @Column(name = "stadium_id")
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "stadium_id")
-    private Stadium stadium;
+    private Stadium homeStadium;
 
     @Column(name = "ht_score")
-    private Integer homeTEamScore;
+    private Integer homeTeamScore;
 
     @Column(name = "at_score")
     private Integer awayTeamScore;
@@ -43,12 +41,12 @@ public class Match {
     public Match() {
     }
 
-    public Match(LocalDateTime matchDateTime, Team homeTeam, Team awayTeam, Stadium stadium, Integer homeTEamScore, Integer awayTeamScore, Integer attendance) {
+    public Match(LocalDateTime matchDateTime, Team homeTeam, Team awayTeam, Stadium homeStadium, Integer homeTeamScore, Integer awayTeamScore, Integer attendance) {
         this.matchDateTime = matchDateTime;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
-        this.stadium = stadium;
-        this.homeTEamScore = homeTEamScore;
+        this.homeStadium = homeStadium;
+        this.homeTeamScore = homeTeamScore;
         this.awayTeamScore = awayTeamScore;
         this.attendance = attendance;
     }
@@ -85,20 +83,20 @@ public class Match {
         this.awayTeam = awayTeam;
     }
 
-    public Stadium getStadium() {
-        return stadium;
+    public Stadium getHomeStadium() {
+        return homeStadium;
     }
 
-    public void setStadium(Stadium stadium) {
-        this.stadium = stadium;
+    public void setHomeStadium(Stadium homeStadium) {
+        this.homeStadium = homeStadium;
     }
 
-    public Integer getHomeTEamScore() {
-        return homeTEamScore;
+    public Integer getHomeTeamScore() {
+        return homeTeamScore;
     }
 
-    public void setHomeTEamScore(Integer homeTEamScore) {
-        this.homeTEamScore = homeTEamScore;
+    public void setHomeTeamScore(Integer homeTeamScore) {
+        this.homeTeamScore = homeTeamScore;
     }
 
     public Integer getAwayTeamScore() {
@@ -115,19 +113,5 @@ public class Match {
 
     public void setAttendance(Integer attendance) {
         this.attendance = attendance;
-    }
-
-    @Override
-    public String toString() {
-        return "Match{" +
-                "id=" + id +
-                ", matchDateTime=" + matchDateTime +
-                ", homeTeam=" + homeTeam +
-                ", awayTeam=" + awayTeam +
-                ", stadium=" + stadium +
-                ", homeTEamScore=" + homeTEamScore +
-                ", awayTeamScore=" + awayTeamScore +
-                ", attendance=" + attendance +
-                '}';
     }
 }
