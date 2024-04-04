@@ -20,5 +20,15 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
             "left join fetch t.city " +
             "left join fetch t.stadium " +
             "where t.id = ?1")
-    Optional<Team> getFullTeam(Integer id) throws TeamNotFoundException;
+    Optional<Team> getFullTeamById(Integer id) throws TeamNotFoundException;
+
+    @Query("select t from Team t " +
+            "left join fetch t.manager " +
+            "left join fetch t.players " +
+            "left join fetch t.city " +
+            "left join fetch t.stadium " +
+            "where t.teamName = ?1")
+    Optional<Team> getFullTeamByName(String teamName) throws TeamNotFoundException;
+
+    Optional<Team> findTeamByStadiumId(Integer id);
 }

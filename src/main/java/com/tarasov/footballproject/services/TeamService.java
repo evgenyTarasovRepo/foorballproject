@@ -65,7 +65,7 @@ public class TeamService {
     }
 
     public GetFullTeamInfoDTO getFullTeamInfo(Integer id) {
-        Optional<Team> team = teamRepository.getFullTeam(id);
+        Optional<Team> team = teamRepository.getFullTeamById(id);
         GetFullTeamInfoDTO teamInfoDTO = null;
         if (team.isPresent()) {
             teamInfoDTO = team.map(teamDTOFullTeamMapper).get();
@@ -87,9 +87,11 @@ public class TeamService {
     }
 
     @Transactional
-    public Team updateTeam(Integer id, Team teamForUpdate) {
+    public Team updateTeam(Integer id, PostTeamDTO postTeamDTO) {
         Team updatedTeam = teamRepository.findById(id).get();
-        updatedTeam.setTeamName(teamForUpdate.getTeamName());
+        Stadium stadium = stadiumRepository.findStadiumByStadiumNameIgnoreCase(postTeamDTO.getTeamStadium());
+        updatedTeam.setTeamName(postTeamDTO.getTeamName());
+        updatedTeam.setStadium(stadium);
 
         return teamRepository.save(updatedTeam);
     }

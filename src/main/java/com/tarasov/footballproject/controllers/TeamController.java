@@ -58,21 +58,10 @@ public class TeamController {
     }
 
     @PutMapping("/teams/{id}")
-    public ResponseEntity<Team> updateTeam(@PathVariable Integer id, @RequestBody Team team) {
-        teamService.updateTeam(id, team);
+    public ResponseEntity<PostTeamDTO> updateTeam(@PathVariable Integer id, @RequestBody PostTeamDTO postTeamDTO) {
+        teamService.updateTeam(id, postTeamDTO);
 
-        return ResponseEntity.ok(team);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<Object> handleTeamException(TeamNotFoundException exc) {
-        TeamErrorResponse exceptionResponse = new TeamErrorResponse();
-
-        exceptionResponse.setStatus(HttpStatus.NOT_FOUND.value());
-        exceptionResponse.setMessage(exc.getMessage());
-        exceptionResponse.setTimeStamp(ZonedDateTime.now(ZoneId.of("Z")));
-
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+        return ResponseEntity.ok(postTeamDTO);
     }
 
 }
