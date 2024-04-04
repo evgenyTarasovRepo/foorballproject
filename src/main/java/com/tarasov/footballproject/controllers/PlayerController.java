@@ -33,6 +33,12 @@ public class PlayerController {
 
         return ResponseEntity.ok(players);
     }
+    @GetMapping("/players/team/{team}")
+    public ResponseEntity<List<GetPlayerDTO>> findPlayersByTeamName(@PathVariable String team) {
+        List<GetPlayerDTO> players = playerService.findPlayersByTeamName(team);
+
+        return ResponseEntity.ok(players);
+    }
 
     @GetMapping("/players/{id}")
     public ResponseEntity<GetPlayerDTO> findPlayerById(@PathVariable Integer id) {

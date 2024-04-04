@@ -45,6 +45,13 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
+    public List<GetPlayerDTO> findPlayersByTeamName(String team) {
+        return playerRepository.findPlayersByTeamNameIgnoreCase(team)
+                .stream()
+                .map(playerDTOMapper)
+                .collect(Collectors.toList());
+    }
+
     public GetPlayerDTO findPlayerById(Integer id) {
         return playerRepository.findById(id)
                 .map(playerDTOMapper)
