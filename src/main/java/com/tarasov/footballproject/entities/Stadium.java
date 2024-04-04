@@ -64,7 +64,6 @@ public class Stadium {
         this.city = city;
     }
 
-
     @Override
     public String toString() {
         return "Stadium{" +

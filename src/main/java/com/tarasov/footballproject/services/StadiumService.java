@@ -2,7 +2,9 @@ package com.tarasov.footballproject.services;
 
 import com.tarasov.footballproject.entities.City;
 import com.tarasov.footballproject.entities.Stadium;
+import com.tarasov.footballproject.entities.Team;
 import com.tarasov.footballproject.repositores.StadiumRepository;
+import com.tarasov.footballproject.repositores.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,10 +16,12 @@ import java.util.Optional;
 public class StadiumService {
 
     private StadiumRepository stadiumRepository;
+    private TeamRepository teamRepository;
 
     @Autowired
-    public StadiumService(StadiumRepository stadiumRepository) {
+    public StadiumService(StadiumRepository stadiumRepository, TeamRepository teamRepository) {
         this.stadiumRepository = stadiumRepository;
+        this.teamRepository = teamRepository;
     }
 
     @Transactional
@@ -39,6 +43,10 @@ public class StadiumService {
         Optional<Stadium> temp = stadiumRepository.findById(id);
         Stadium deletedStadium = temp.get();
         deletedStadium.setCity(null);
+
+        Team team = teamRepository.findTeamByStadiumId(deletedStadium.getId()).get();
+        team.setStadium(null);
+
         stadiumRepository.delete(deletedStadium);
     }
 
@@ -47,6 +55,7 @@ public class StadiumService {
         Stadium existingStadium = stadiumRepository.findById(id).get();
         City updatedCity = new City();
 
+        existingStadium.setId(id);
         existingStadium.setStadiumName(stadiumForUpdate.getStadiumName());
         existingStadium.setCapacity(stadiumForUpdate.getCapacity());
 
