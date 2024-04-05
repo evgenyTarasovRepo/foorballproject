@@ -1,14 +1,15 @@
 package com.tarasov.footballproject.controllers;
 
+import com.tarasov.footballproject.dto.get.GetMatchDTO;
 import com.tarasov.footballproject.dto.post.PostMatchDTO;
+import com.tarasov.footballproject.entities.Match;
 import com.tarasov.footballproject.services.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -24,5 +25,30 @@ public class MatchController {
     public ResponseEntity<Void> saveMatch(@RequestBody PostMatchDTO matchDTO) {
         matchService.saveMatch(matchDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/matches/{id}")
+    public ResponseEntity<GetMatchDTO> findMatchById(@PathVariable Integer id) {
+        GetMatchDTO getMatchDTO = matchService.findMatchById(id);
+
+        return ResponseEntity.ok(getMatchDTO);
+    }
+
+    @GetMapping("/matches")
+    public ResponseEntity<List<GetMatchDTO>> findAllMatches() {
+        List<GetMatchDTO> matchList = matchService.findAllMatches();
+        return ResponseEntity.ok(matchList);
+    }
+
+    @DeleteMapping("/matches/{id}")
+    public ResponseEntity<String> deleteMatchById(@PathVariable Integer id) {
+        matchService.deleteMatchById(id);
+        return ResponseEntity.ok("Match with id " + id + " was deleted!");
+    }
+
+    @PutMapping("matches/{id}")
+    public ResponseEntity<PostMatchDTO> updateMatch(@PathVariable Integer id, @RequestBody PostMatchDTO postMatchDTO) {
+        PostMatchDTO updatedMatch = matchService.updateMatch(id, postMatchDTO);
+        return ResponseEntity.ok(updatedMatch);
     }
 }
