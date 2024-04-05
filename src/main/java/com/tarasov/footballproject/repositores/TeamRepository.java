@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface TeamRepository extends JpaRepository<Team, Integer> {
 
     @Query("select t from Team t where t.teamName = ?1")
-    Team findTeamByTeamNameIgnoreCase(String name);
+    Optional<Team> findTeamByTeamNameIgnoreCase(String name);
 
     @Query("select t from Team t " +
             "left join fetch t.manager " +

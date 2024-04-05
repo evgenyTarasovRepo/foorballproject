@@ -80,7 +80,7 @@ public class PlayerService {
     }
 
     private Team getTeamByName(String teamName) {
-        return teamRepository.findTeamByTeamNameIgnoreCase(teamName);
+        return teamRepository.findTeamByTeamNameIgnoreCase(teamName).get();
     }
 
     private Player constructPlayer(PostPlayerDTO postPlayerDTO) {

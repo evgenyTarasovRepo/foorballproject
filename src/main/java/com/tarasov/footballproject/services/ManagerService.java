@@ -31,7 +31,7 @@ public class ManagerService {
     public Manager saveManager(PostManagerDTO postManagerDTO) {
         Manager savedManager = new Manager(postManagerDTO.getFirstName(), postManagerDTO.getLastName(),
                 postManagerDTO.getNationality(), postManagerDTO.getDob());
-        Team team = teamRepository.findTeamByTeamNameIgnoreCase(postManagerDTO.getTeamName());
+        Team team = teamRepository.findTeamByTeamNameIgnoreCase(postManagerDTO.getTeamName()).get();
 
         savedManager.setTeam(team);
         team.setManager(savedManager);
@@ -61,7 +61,7 @@ public class ManagerService {
 
     public Manager updateManager(Integer id, PostManagerDTO postManagerDTO) {
         Manager managerForUpdate = managerRepository.findById(id).get();
-        Team teamForUpdate = teamRepository.findTeamByTeamNameIgnoreCase(postManagerDTO.getTeamName());
+        Team teamForUpdate = teamRepository.findTeamByTeamNameIgnoreCase(postManagerDTO.getTeamName()).get();
 
         managerForUpdate.setId(managerForUpdate.getId());
         managerForUpdate.setFirstName(postManagerDTO.getFirstName());

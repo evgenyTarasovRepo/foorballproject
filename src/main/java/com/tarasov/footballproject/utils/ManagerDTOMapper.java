@@ -1,7 +1,6 @@
 package com.tarasov.footballproject.utils;
 
 import com.tarasov.footballproject.dto.get.GetManagerDTO;
-import com.tarasov.footballproject.dto.post.PostManagerDTO;
 import com.tarasov.footballproject.entities.Manager;
 import org.springframework.stereotype.Service;
 
