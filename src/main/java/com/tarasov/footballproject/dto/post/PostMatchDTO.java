@@ -7,22 +7,17 @@ public class PostMatchDTO {
     private String homeTeam;
     private String awayTeam;
     private String stadium;
-    private Integer homeTeamScore;
-    private Integer awayTeamScore;
     private Integer attendance;
 
     public PostMatchDTO() {
     }
 
     public PostMatchDTO(LocalDateTime matchDateTime, String homeTeam, String awayTeam,
-                        String stadium, Integer homeTeamScore, Integer awayTeamScore,
-                        Integer attendance) {
+                        String stadium, Integer attendance) {
         this.matchDateTime = matchDateTime;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.stadium = stadium;
-        this.homeTeamScore = homeTeamScore;
-        this.awayTeamScore = awayTeamScore;
         this.attendance = attendance;
     }
 
@@ -57,22 +52,6 @@ public class PostMatchDTO {
 
     public void setStadium(String stadium) {
         this.stadium = stadium;
-    }
-
-    public Integer getHomeTeamScore() {
-        return homeTeamScore;
-    }
-
-    public void setHomeTeamScore(Integer homeTeamScore) {
-        this.homeTeamScore = homeTeamScore;
-    }
-
-    public Integer getAwayTeamScore() {
-        return awayTeamScore;
-    }
-
-    public void setAwayTeamScore(Integer awayTeamScore) {
-        this.awayTeamScore = awayTeamScore;
     }
 
     public Integer getAttendance() {
