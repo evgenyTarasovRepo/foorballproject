@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -35,6 +37,7 @@ public class PlayerController {
     }
     @GetMapping("/players/team/{team}")
     public ResponseEntity<List<GetPlayerDTO>> findPlayersByTeamName(@PathVariable String team) {
+        URLDecoder.decode(team, StandardCharsets.UTF_8);
         List<GetPlayerDTO> players = playerService.findPlayersByTeamName(team);
 
         return ResponseEntity.ok(players);

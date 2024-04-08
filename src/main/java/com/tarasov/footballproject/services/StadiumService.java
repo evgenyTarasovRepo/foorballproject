@@ -44,7 +44,7 @@ public class StadiumService {
         Stadium deletedStadium = temp.get();
         deletedStadium.setCity(null);
 
-        Team team = teamRepository.findTeamByStadiumId(deletedStadium.getId()).get();
+        Team team = teamRepository.findTeamByStadiumId(deletedStadium.getId()).orElse(new Team());
         team.setStadium(null);
 
         stadiumRepository.delete(deletedStadium);
