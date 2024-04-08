@@ -11,8 +11,6 @@ public class GetMatchDTO {
     private String awayTeam;
     private List<String> awayTeamPlayers;
     private String stadium;
-    private Integer homeTeamScore;
-    private Integer awayTeamScore;
     private Integer attendance;
 
     public GetMatchDTO() {
@@ -21,8 +19,7 @@ public class GetMatchDTO {
     public GetMatchDTO(Integer integer, LocalDateTime matchDateTime,
                        String homeTeam, List<String> homeTeamPlayers,
                        String awayTeam, List<String> awayTeamPlayers,
-                       String stadium, Integer homeTeamScore,
-                       Integer awayTeamScore, Integer attendance) {
+                       String stadium, Integer attendance) {
         this.integer = integer;
         this.matchDateTime = matchDateTime;
         this.homeTeam = homeTeam;
@@ -30,8 +27,6 @@ public class GetMatchDTO {
         this.awayTeam = awayTeam;
         this.awayTeamPlayers = awayTeamPlayers;
         this.stadium = stadium;
-        this.homeTeamScore = homeTeamScore;
-        this.awayTeamScore = awayTeamScore;
         this.attendance = attendance;
     }
 
@@ -89,22 +84,6 @@ public class GetMatchDTO {
 
     public void setStadium(String stadium) {
         this.stadium = stadium;
-    }
-
-    public Integer getHomeTeamScore() {
-        return homeTeamScore;
-    }
-
-    public void setHomeTeamScore(Integer homeTeamScore) {
-        this.homeTeamScore = homeTeamScore;
-    }
-
-    public Integer getAwayTeamScore() {
-        return awayTeamScore;
-    }
-
-    public void setAwayTeamScore(Integer awayTeamScore) {
-        this.awayTeamScore = awayTeamScore;
     }
 
     public Integer getAttendance() {

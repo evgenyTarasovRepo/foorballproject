@@ -29,25 +29,23 @@ public class Match {
     @JoinColumn(name = "stadium_id")
     private Stadium homeStadium;
 
-    @Column(name = "ht_score")
-    private Integer homeTeamScore;
-
-    @Column(name = "at_score")
-    private Integer awayTeamScore;
-
     @Column(name = "attendance")
     private Integer attendance;
+
+    @Transient
+    private Integer homeTeamScore;
+
+    @Transient
+    private Integer awayTeamScore;
 
     public Match() {
     }
 
-    public Match(LocalDateTime matchDateTime, Team homeTeam, Team awayTeam, Stadium homeStadium, Integer homeTeamScore, Integer awayTeamScore, Integer attendance) {
+    public Match(LocalDateTime matchDateTime, Team homeTeam, Team awayTeam, Stadium homeStadium, Integer attendance) {
         this.matchDateTime = matchDateTime;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeStadium = homeStadium;
-        this.homeTeamScore = homeTeamScore;
-        this.awayTeamScore = awayTeamScore;
         this.attendance = attendance;
     }
 

@@ -47,8 +47,6 @@ public class MatchService {
         newMatch.setHomeTeam(homeTeam);
         newMatch.setAwayTeam(awayTeam);
         newMatch.setHomeStadium(homeTeam.getStadium());
-        newMatch.setHomeTeamScore(matchDTO.getHomeTeamScore());
-        newMatch.setAwayTeamScore(matchDTO.getAwayTeamScore());
         newMatch.setAttendance(matchDTO.getAttendance());
 
         matchRepository.save(newMatch);
@@ -87,8 +85,6 @@ public class MatchService {
         updatedMatch.setHomeTeam(ht);
         updatedMatch.setAwayTeam(at);
         updatedMatch.setHomeStadium(hs);
-        updatedMatch.setHomeTeamScore(postMatchDTO.getHomeTeamScore());
-        updatedMatch.setAwayTeamScore(postMatchDTO.getAwayTeamScore());
         updatedMatch.setAttendance(postMatchDTO.getAttendance());
 
         matchRepository.save(updatedMatch);
