@@ -48,6 +48,7 @@ public class MatchService {
         newMatch.setAwayTeam(awayTeam);
         newMatch.setHomeStadium(homeTeam.getStadium());
         newMatch.setAttendance(matchDTO.getAttendance());
+        newMatch.setCompleted(false);
 
         matchRepository.save(newMatch);
         return newMatch;
@@ -90,5 +91,12 @@ public class MatchService {
         matchRepository.save(updatedMatch);
 
         return postMatchDTO;
+    }
+
+    public Match updateMatchStatus(Integer id) {
+        Match finishedMatch = matchRepository.findById(id).get();
+        finishedMatch.setId(id);
+        finishedMatch.setCompleted(true);
+        return matchRepository.save(finishedMatch);
     }
 }

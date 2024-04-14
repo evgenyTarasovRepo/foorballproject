@@ -2,6 +2,7 @@ package com.tarasov.footballproject.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Formula;
 
 import java.time.LocalDateTime;
 
@@ -32,11 +33,29 @@ public class Match {
     @Column(name = "attendance")
     private Integer attendance;
 
-    @Transient
+    @Column(name = "completed")
+    private Boolean isCompleted;
+    @Formula("(SELECT count(*) " +
+            "FROM goals g " +
+            "join players p " +
+            "on g.p_id = p.p_id " +
+            "join teams t " +
+            "on p.team_id = t.team_id " +
+            "where g.match_id = match_id and " +
+            "t.team_id = home_team_id)")
     private Integer homeTeamScore;
 
-    @Transient
+    @Formula("(SELECT count(*) " +
+            "FROM goals g " +
+            "join players p " +
+            "on g.p_id = p.p_id " +
+            "join teams t " +
+            "on p.team_id = t.team_id " +
+            "where g.match_id = match_id and " +
+            "t.team_id = away_team_id)")
     private Integer awayTeamScore;
+
+
 
     public Match() {
     }
@@ -111,5 +130,13 @@ public class Match {
 
     public void setAttendance(Integer attendance) {
         this.attendance = attendance;
+    }
+
+    public Boolean getCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
     }
 }
