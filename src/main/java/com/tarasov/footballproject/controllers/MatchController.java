@@ -40,6 +40,12 @@ public class MatchController {
         return ResponseEntity.ok(matchList);
     }
 
+    @PutMapping("/matches/{id}/endMatch")
+    public ResponseEntity<String> updateMatchStatus(@PathVariable Integer id){
+        matchService.updateMatchStatus(id);
+        return ResponseEntity.ok("Match with id " + id + " is finished!");
+    }
+
     @DeleteMapping("/matches/{id}")
     public ResponseEntity<String> deleteMatchById(@PathVariable Integer id) {
         matchService.deleteMatchById(id);
