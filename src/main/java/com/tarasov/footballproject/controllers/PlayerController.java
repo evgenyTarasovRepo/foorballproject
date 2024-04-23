@@ -1,6 +1,7 @@
 package com.tarasov.footballproject.controllers;
 
 import com.tarasov.footballproject.dto.get.GetPlayerDTO;
+import com.tarasov.footballproject.dto.get.GetScorersGTO;
 import com.tarasov.footballproject.dto.post.PostPlayerDTO;
 import com.tarasov.footballproject.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,13 @@ public class PlayerController {
         List<GetPlayerDTO> players = playerService.findAllPlayers();
 
         return ResponseEntity.ok(players);
+    }
+
+    @GetMapping("/players/scorers")
+    public ResponseEntity<List<GetScorersGTO>> findAllScorers() {
+        List<GetScorersGTO> scorers = playerService.findAllScorers();
+
+        return ResponseEntity.ok(scorers);
     }
     @GetMapping("/players/team/{team}")
     public ResponseEntity<List<GetPlayerDTO>> findPlayersByTeamName(@PathVariable String team) {

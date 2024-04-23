@@ -1,16 +1,19 @@
 package com.tarasov.footballproject.services;
 
 import com.tarasov.footballproject.dto.get.GetPlayerDTO;
+import com.tarasov.footballproject.dto.get.GetScorersGTO;
 import com.tarasov.footballproject.dto.post.PostPlayerDTO;
 import com.tarasov.footballproject.entities.Player;
 import com.tarasov.footballproject.entities.Team;
 import com.tarasov.footballproject.repositores.PlayerRepository;
 import com.tarasov.footballproject.repositores.TeamRepository;
 import com.tarasov.footballproject.utils.PlayerDTOMapper;
+import com.tarasov.footballproject.utils.ScorerDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,12 +23,15 @@ public class PlayerService {
     private PlayerRepository playerRepository;
     private TeamRepository teamRepository;
     private PlayerDTOMapper playerDTOMapper;
+    private ScorerDTOMapper scorerDTOMapper;
 
     @Autowired
-    public PlayerService(PlayerRepository playerRepository, TeamRepository teamRepository, PlayerDTOMapper playerDTOMapper) {
+    public PlayerService(PlayerRepository playerRepository, TeamRepository teamRepository,
+                         PlayerDTOMapper playerDTOMapper, ScorerDTOMapper scorerDTOMapper) {
         this.playerRepository = playerRepository;
         this.teamRepository = teamRepository;
         this.playerDTOMapper = playerDTOMapper;
+        this.scorerDTOMapper = scorerDTOMapper;
     }
 
     public Player savePlayer(PostPlayerDTO postPlayerDTO) {
@@ -42,6 +48,15 @@ public class PlayerService {
         return playerRepository.findAll()
                 .stream()
                 .map(playerDTOMapper)
+                .collect(Collectors.toList());
+    }
+
+    public List<GetScorersGTO> findAllScorers() {
+        return playerRepository.findAll()
+                .stream()
+                .filter(player -> player.getPlayerGoals() > 0)
+                .sorted(Comparator.comparing(Player::getPlayerGoals).reversed())
+                .map(scorerDTOMapper)
                 .collect(Collectors.toList());
     }
 

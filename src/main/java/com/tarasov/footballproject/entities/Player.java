@@ -3,8 +3,10 @@ package com.tarasov.footballproject.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Formula;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "players")
@@ -38,7 +40,9 @@ public class Player {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private Team team;
-
+    
+    @Formula("(select count(*) from goals g where g.p_id = p_id)")
+    private Integer playerGoals;
     public Player() {
     }
 
@@ -113,6 +117,14 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public Integer getPlayerGoals() {
+        return playerGoals;
+    }
+
+    public void setPlayerGoals(Integer playerGoals) {
+        this.playerGoals = playerGoals;
     }
 
     @Override

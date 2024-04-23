@@ -10,4 +10,5 @@ import java.util.List;
 public interface PlayerRepository extends JpaRepository<Player, Integer> {
     @Query("select p from Player p where p.team.teamName = ?1 order by p.playerNumber")
     List<Player> findPlayersByTeamNameIgnoreCase(String team);
+    Player findPlayerByFirstNameAndAndLastName(String firstName, String lastName);
 }
