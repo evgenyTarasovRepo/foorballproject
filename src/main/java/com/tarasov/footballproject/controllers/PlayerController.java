@@ -1,5 +1,6 @@
 package com.tarasov.footballproject.controllers;
 
+import com.tarasov.footballproject.dto.get.GetAssistantsGTO;
 import com.tarasov.footballproject.dto.get.GetPlayerDTO;
 import com.tarasov.footballproject.dto.get.GetScorersGTO;
 import com.tarasov.footballproject.dto.post.PostPlayerDTO;
@@ -43,6 +44,14 @@ public class PlayerController {
 
         return ResponseEntity.ok(scorers);
     }
+
+    @GetMapping("/players/assistants")
+    public ResponseEntity<List<GetAssistantsGTO>> findAllAssistants() {
+        List<GetAssistantsGTO> assistants = playerService.findAllAssistants();
+
+        return ResponseEntity.ok(assistants);
+    }
+
     @GetMapping("/players/team/{team}")
     public ResponseEntity<List<GetPlayerDTO>> findPlayersByTeamName(@PathVariable String team) {
         URLDecoder.decode(team, StandardCharsets.UTF_8);

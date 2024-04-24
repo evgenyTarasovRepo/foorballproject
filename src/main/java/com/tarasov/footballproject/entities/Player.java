@@ -43,6 +43,9 @@ public class Player {
     
     @Formula("(select count(*) from goals g where g.p_id = p_id)")
     private Integer playerGoals;
+
+    @Formula("(select count(*) from goals g where g.a_id = p_id)")
+    private Integer playerAssists;
     public Player() {
     }
 
@@ -125,6 +128,14 @@ public class Player {
 
     public void setPlayerGoals(Integer playerGoals) {
         this.playerGoals = playerGoals;
+    }
+
+    public Integer getPlayerAssists() {
+        return playerAssists;
+    }
+
+    public void setPlayerAssists(Integer playerAssists) {
+        this.playerAssists = playerAssists;
     }
 
     @Override

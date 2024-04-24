@@ -1,5 +1,6 @@
 package com.tarasov.footballproject.services;
 
+import com.tarasov.footballproject.dto.get.GetAssistantsGTO;
 import com.tarasov.footballproject.dto.get.GetPlayerDTO;
 import com.tarasov.footballproject.dto.get.GetScorersGTO;
 import com.tarasov.footballproject.dto.post.PostPlayerDTO;
@@ -7,6 +8,7 @@ import com.tarasov.footballproject.entities.Player;
 import com.tarasov.footballproject.entities.Team;
 import com.tarasov.footballproject.repositores.PlayerRepository;
 import com.tarasov.footballproject.repositores.TeamRepository;
+import com.tarasov.footballproject.utils.AssistantDTOMapper;
 import com.tarasov.footballproject.utils.PlayerDTOMapper;
 import com.tarasov.footballproject.utils.ScorerDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +26,17 @@ public class PlayerService {
     private TeamRepository teamRepository;
     private PlayerDTOMapper playerDTOMapper;
     private ScorerDTOMapper scorerDTOMapper;
+    private AssistantDTOMapper assistantDTOMapper;
 
     @Autowired
     public PlayerService(PlayerRepository playerRepository, TeamRepository teamRepository,
-                         PlayerDTOMapper playerDTOMapper, ScorerDTOMapper scorerDTOMapper) {
+                         PlayerDTOMapper playerDTOMapper, ScorerDTOMapper scorerDTOMapper,
+                         AssistantDTOMapper assistantDTOMapper) {
         this.playerRepository = playerRepository;
         this.teamRepository = teamRepository;
         this.playerDTOMapper = playerDTOMapper;
         this.scorerDTOMapper = scorerDTOMapper;
+        this.assistantDTOMapper = assistantDTOMapper;
     }
 
     public Player savePlayer(PostPlayerDTO postPlayerDTO) {
@@ -57,6 +62,15 @@ public class PlayerService {
                 .filter(player -> player.getPlayerGoals() > 0)
                 .sorted(Comparator.comparing(Player::getPlayerGoals).reversed())
                 .map(scorerDTOMapper)
+                .collect(Collectors.toList());
+    }
+
+    public List<GetAssistantsGTO> findAllAssistants() {
+        return playerRepository.findAll()
+                .stream()
+                .filter(player -> player.getPlayerAssists() > 0)
+                .sorted(Comparator.comparing(Player::getPlayerAssists).reversed())
+                .map(assistantDTOMapper)
                 .collect(Collectors.toList());
     }
 
