@@ -69,7 +69,7 @@ public class PlayerController {
     @DeleteMapping("players/{id}")
     public ResponseEntity<String> deletePlayerById(@PathVariable Integer id) {
         playerService.deletePlayerById(id);
-        return ResponseEntity.ok("Player with id: " + id + " was deleted");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/players/{id}")

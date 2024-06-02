@@ -39,7 +39,7 @@ public class ManagerController {
     @DeleteMapping("/managers/{id}")
     public ResponseEntity<String> deleteManagerById(@PathVariable Integer id) {
         managerService.deleteManager(id);
-        return ResponseEntity.ok("Manager with id: " + id + " was deleted");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/managers/{id}")

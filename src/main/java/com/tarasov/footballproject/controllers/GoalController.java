@@ -43,7 +43,7 @@ public class GoalController {
     @DeleteMapping("/goals/{id}")
     public ResponseEntity<String> deleteGoalById(@PathVariable Integer id) {
         goalService.deleteGoalById(id);
-        return ResponseEntity.ok("Goal with id " + id + " was deleted!");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/goals/{id}")

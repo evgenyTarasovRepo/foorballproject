@@ -43,13 +43,13 @@ public class MatchController {
     @PutMapping("/matches/{id}/endMatch")
     public ResponseEntity<String> updateMatchStatus(@PathVariable Integer id){
         matchService.updateMatchStatus(id);
-        return ResponseEntity.ok("Match with id " + id + " is finished!");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/matches/{id}")
     public ResponseEntity<String> deleteMatchById(@PathVariable Integer id) {
         matchService.deleteMatchById(id);
-        return ResponseEntity.ok("Match with id " + id + " was deleted!");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("matches/{id}")

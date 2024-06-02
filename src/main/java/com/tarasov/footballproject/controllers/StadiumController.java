@@ -51,6 +51,6 @@ public class StadiumController {
     public ResponseEntity<String> deleteStadium(@PathVariable Integer id) {
         stadiumService.deleteStadium(id);
 
-        return ResponseEntity.ok("Stadium " + id + " was deleted@");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

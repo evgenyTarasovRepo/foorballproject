@@ -54,7 +54,7 @@ public class TeamController {
     public ResponseEntity<String> deleteTeamById(@PathVariable Integer id) {
         teamService.deleteTeamById(id);
 
-        return ResponseEntity.ok("Team with id: " + id + " was deleted");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/teams/{id}")

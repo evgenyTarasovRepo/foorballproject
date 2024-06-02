@@ -51,6 +51,6 @@ public class CityController {
     public ResponseEntity<String> deleteCity(@PathVariable Integer id) {
         cityService.deleteById(id);
 
-        return ResponseEntity.ok("City with id: " + id + " deleted");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
