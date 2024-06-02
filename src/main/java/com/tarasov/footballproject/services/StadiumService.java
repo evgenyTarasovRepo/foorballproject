@@ -1,27 +1,32 @@
 package com.tarasov.footballproject.services;
 
+import com.tarasov.footballproject.dto.get.GetStadiumDTO;
 import com.tarasov.footballproject.entities.City;
 import com.tarasov.footballproject.entities.Stadium;
 import com.tarasov.footballproject.entities.Team;
 import com.tarasov.footballproject.repositores.StadiumRepository;
 import com.tarasov.footballproject.repositores.TeamRepository;
+import com.tarasov.footballproject.utils.StadiumToDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StadiumService {
 
     private StadiumRepository stadiumRepository;
     private TeamRepository teamRepository;
+    private StadiumToDtoMapper stadiumToDtoMapper;
 
     @Autowired
-    public StadiumService(StadiumRepository stadiumRepository, TeamRepository teamRepository) {
+    public StadiumService(StadiumRepository stadiumRepository, TeamRepository teamRepository, StadiumToDtoMapper stadiumToDtoMapper) {
         this.stadiumRepository = stadiumRepository;
         this.teamRepository = teamRepository;
+        this.stadiumToDtoMapper = stadiumToDtoMapper;
     }
 
     @Transactional
@@ -30,12 +35,17 @@ public class StadiumService {
         return stadiumRepository.save(stadium);
     }
 
-    public Optional<Stadium> findStadiumById(Integer id) {
-        return stadiumRepository.findById(id);
+    public GetStadiumDTO findStadiumById(Integer id) {
+
+        return stadiumRepository.findById(id).map(stadiumToDtoMapper).get();
     }
 
-    public List<Stadium> findAllStadiums() {
-        return stadiumRepository.findAll();
+    public List<GetStadiumDTO> findAllStadiums() {
+
+        return stadiumRepository.findAll()
+                .stream()
+                .map(stadiumToDtoMapper)
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -60,7 +70,7 @@ public class StadiumService {
         existingStadium.setCapacity(stadiumForUpdate.getCapacity());
 
         updatedCity.setId(stadiumForUpdate.getCity().getId());
-        updatedCity.setCityName(stadiumForUpdate.getCity().getCityName());
+        updatedCity.setName(stadiumForUpdate.getCity().getName());
         updatedCity.setCountryName(stadiumForUpdate.getCity().getCountryName());
 
         existingStadium.setCity(updatedCity);

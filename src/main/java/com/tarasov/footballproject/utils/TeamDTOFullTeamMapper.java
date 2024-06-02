@@ -20,7 +20,7 @@ public class TeamDTOFullTeamMapper implements Function<Team, GetFullTeamInfoDTO>
         }
 
         if (team.getCity() != null) {
-            dto.setCity(team.getCity().getCityName());
+            dto.setCity(team.getCity().getName());
         } else {
             dto.setCity(null);
         }

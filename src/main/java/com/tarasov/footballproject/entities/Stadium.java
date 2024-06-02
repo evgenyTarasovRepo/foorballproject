@@ -18,7 +18,7 @@ public class Stadium {
     @Column(name = "capacity")
     private Integer capacity;
 
-    @JsonBackReference
+//    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;

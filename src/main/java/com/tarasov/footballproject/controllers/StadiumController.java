@@ -1,5 +1,6 @@
 package com.tarasov.footballproject.controllers;
 
+import com.tarasov.footballproject.dto.get.GetStadiumDTO;
 import com.tarasov.footballproject.entities.Stadium;
 import com.tarasov.footballproject.services.StadiumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,15 @@ public class StadiumController {
     }
 
     @GetMapping("/stadiums/{id}")
-    public ResponseEntity<Stadium> findStadiumById(@PathVariable Integer id) {
-        Stadium stadium = stadiumService.findStadiumById(id).get();
+    public ResponseEntity<GetStadiumDTO> findStadiumById(@PathVariable Integer id) {
+        GetStadiumDTO stadium = stadiumService.findStadiumById(id);
 
         return ResponseEntity.ok(stadium);
     }
 
     @GetMapping("/stadiums")
-    public ResponseEntity<List<Stadium>> findAllCities() {
-        List<Stadium> stadiums = stadiumService.findAllStadiums();
+    public ResponseEntity<List<GetStadiumDTO>> findAllCities() {
+        List<GetStadiumDTO> stadiums = stadiumService.findAllStadiums();
         return ResponseEntity.ok(stadiums);
     }
 

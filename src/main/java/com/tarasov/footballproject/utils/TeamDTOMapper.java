@@ -14,7 +14,7 @@ public class TeamDTOMapper implements Function<Team, GetTeamDTO> {
         return new GetTeamDTO(
                 team.getId(),
                 team.getTeamName(),
-                team.getCity().getCityName(),
+                team.getCity().getName(),
                 team.getStadium().getStadiumName());
     }
 }

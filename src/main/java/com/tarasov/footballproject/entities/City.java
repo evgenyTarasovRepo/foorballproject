@@ -16,13 +16,14 @@ public class City {
     private Integer id;
 
     @Column(name = "city_name")
-    private String cityName;
+    private String name;
 
     @Column(name = "country_name")
     private String countryName;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "city", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "city", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Stadium> stadiums;
 
 //    @JsonManagedReference
@@ -33,7 +34,7 @@ public class City {
     }
 
     public City(String cityName, String countryName) {
-        this.cityName = cityName;
+        this.name = cityName;
         this.countryName = countryName;
     }
 
@@ -45,12 +46,12 @@ public class City {
         this.id = id;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getName() {
+        return name;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setName(String cityName) {
+        this.name = cityName;
     }
 
     public String getCountryName() {
@@ -81,7 +82,7 @@ public class City {
     public String toString() {
         return "City{" +
                 "id=" + id +
-                ", cityName='" + cityName + '\'' +
+                ", cityName='" + name + '\'' +
                 ", countryName='" + countryName + '\'' +
                 '}';
     }

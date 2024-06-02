@@ -1,5 +1,6 @@
 package com.tarasov.footballproject.controllers;
 
+import com.tarasov.footballproject.dto.get.GetCityDTO;
 import com.tarasov.footballproject.entities.City;
 import com.tarasov.footballproject.entities.Stadium;
 import com.tarasov.footballproject.services.CityService;
@@ -28,15 +29,15 @@ public class CityController {
     }
 
     @GetMapping("/cities")
-    public ResponseEntity<List<City>> findAllCities() {
-        List<City> cities = cityService.findAllCities();
+    public ResponseEntity<List<GetCityDTO>> findAllCities() {
+        List<GetCityDTO> cities = cityService.findAllCities();
 
         return ResponseEntity.ok(cities);
     }
 
     @GetMapping("/cities/{id}")
-    public ResponseEntity<City> findCityById(@PathVariable Integer id) {
-        City city = cityService.findCityById(id).get();
+    public ResponseEntity<GetCityDTO> findCityById(@PathVariable Integer id) {
+        GetCityDTO city = cityService.findCityById(id);
         return ResponseEntity.ok(city);
     }
 
