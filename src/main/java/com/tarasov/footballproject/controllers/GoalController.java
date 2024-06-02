@@ -2,6 +2,7 @@ package com.tarasov.footballproject.controllers;
 
 import com.tarasov.footballproject.dto.get.GetGoalDTO;
 import com.tarasov.footballproject.dto.post.PostGoalDTO;
+import com.tarasov.footballproject.dto.update.UpdateGoalDTO;
 import com.tarasov.footballproject.services.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,8 +48,8 @@ public class GoalController {
     }
 
     @PutMapping("/goals/{id}")
-    public ResponseEntity<PostGoalDTO> updateGoal(@PathVariable Integer id, @RequestBody PostGoalDTO postGoalDTO) {
-        goalService.updateMatch(id, postGoalDTO);
-        return ResponseEntity.ok(postGoalDTO);
+    public ResponseEntity<UpdateGoalDTO> updateGoal(@PathVariable Integer id, @RequestBody PostGoalDTO postGoalDTO) {
+        UpdateGoalDTO updateGoalDTO = goalService.updateMatch(id, postGoalDTO);
+        return ResponseEntity.ok(updateGoalDTO);
     }
 }

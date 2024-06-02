@@ -1,8 +1,7 @@
-package com.tarasov.footballproject.utils;
+package com.tarasov.footballproject.mappers;
 
 import com.tarasov.footballproject.dto.get.GetTeamDTO;
 import com.tarasov.footballproject.dto.post.PostTeamDTO;
-import com.tarasov.footballproject.entities.Team;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;

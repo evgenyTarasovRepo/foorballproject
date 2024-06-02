@@ -6,7 +6,7 @@ import com.tarasov.footballproject.entities.Stadium;
 import com.tarasov.footballproject.entities.Team;
 import com.tarasov.footballproject.repositores.StadiumRepository;
 import com.tarasov.footballproject.repositores.TeamRepository;
-import com.tarasov.footballproject.utils.StadiumToDtoMapper;
+import com.tarasov.footballproject.mappers.StadiumToDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

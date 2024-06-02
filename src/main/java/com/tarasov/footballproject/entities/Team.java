@@ -19,7 +19,7 @@ public class Team {
     @Column(name = "team_name")
     private String teamName;
 
-    @JsonBackReference
+//    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
@@ -28,7 +28,7 @@ public class Team {
     @JoinColumn(name = "stadium_id")
     private Stadium stadium;
 
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToMany(mappedBy = "team",cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     List<Player> players;
 

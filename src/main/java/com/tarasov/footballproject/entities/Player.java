@@ -36,7 +36,7 @@ public class Player {
     @Column(name = "position")
     private String position;
 
-    @JsonBackReference
+//    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private Team team;

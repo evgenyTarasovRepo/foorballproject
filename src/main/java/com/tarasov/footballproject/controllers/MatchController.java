@@ -2,6 +2,7 @@ package com.tarasov.footballproject.controllers;
 
 import com.tarasov.footballproject.dto.get.GetMatchDTO;
 import com.tarasov.footballproject.dto.post.PostMatchDTO;
+import com.tarasov.footballproject.dto.update.UpdateMatchDTO;
 import com.tarasov.footballproject.entities.Match;
 import com.tarasov.footballproject.services.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,8 @@ public class MatchController {
     }
 
     @PutMapping("matches/{id}")
-    public ResponseEntity<PostMatchDTO> updateMatch(@PathVariable Integer id, @RequestBody PostMatchDTO postMatchDTO) {
-        PostMatchDTO updatedMatch = matchService.updateMatch(id, postMatchDTO);
+    public ResponseEntity<UpdateMatchDTO> updateMatch(@PathVariable Integer id, @RequestBody PostMatchDTO postMatchDTO) {
+        UpdateMatchDTO updatedMatch = matchService.updateMatch(id, postMatchDTO);
         return ResponseEntity.ok(updatedMatch);
     }
 }

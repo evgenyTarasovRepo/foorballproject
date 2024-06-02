@@ -1,4 +1,4 @@
-package com.tarasov.footballproject.utils;
+package com.tarasov.footballproject.mappers;
 
 import com.tarasov.footballproject.dto.get.GetManagerDTO;
 import com.tarasov.footballproject.entities.Manager;

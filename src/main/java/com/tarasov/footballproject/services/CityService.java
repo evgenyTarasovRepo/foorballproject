@@ -4,13 +4,12 @@ import com.tarasov.footballproject.dto.get.GetCityDTO;
 import com.tarasov.footballproject.entities.City;
 import com.tarasov.footballproject.entities.Stadium;
 import com.tarasov.footballproject.repositores.CityRepository;
-import com.tarasov.footballproject.utils.CityToDtoMapper;
+import com.tarasov.footballproject.mappers.CityToDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

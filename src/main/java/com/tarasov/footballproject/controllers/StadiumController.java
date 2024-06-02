@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class StadiumController {
 
-    StadiumService stadiumService;
+    private StadiumService stadiumService;
 
     @Autowired
     public StadiumController(StadiumService stadiumService) {

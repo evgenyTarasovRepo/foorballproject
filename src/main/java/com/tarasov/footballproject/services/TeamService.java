@@ -10,8 +10,8 @@ import com.tarasov.footballproject.exceptions.TeamNotFoundException;
 import com.tarasov.footballproject.repositores.CityRepository;
 import com.tarasov.footballproject.repositores.StadiumRepository;
 import com.tarasov.footballproject.repositores.TeamRepository;
-import com.tarasov.footballproject.utils.TeamDTOFullTeamMapper;
-import com.tarasov.footballproject.utils.TeamDTOMapper;
+import com.tarasov.footballproject.mappers.TeamDTOFullTeamMapper;
+import com.tarasov.footballproject.mappers.TeamDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,8 +41,8 @@ public class TeamService {
     @Transactional
     public Team saveTeam(PostTeamDTO postTeamDTO) {
         Team savedTeam = new Team();
-        City city = cityRepository.findCityByCityNameIgnoreCase(postTeamDTO.getTeamCity());
-        Stadium stadium = stadiumRepository.findStadiumByStadiumNameIgnoreCase(postTeamDTO.getTeamStadium());
+        City city = cityRepository.findCityByNameContainingIgnoreCase(postTeamDTO.getTeamCity());
+        Stadium stadium = stadiumRepository.findStadiumByStadiumNameContainingIgnoreCase(postTeamDTO.getTeamStadium());
 
         savedTeam.setTeamName(postTeamDTO.getTeamName());
         savedTeam.setCity(city);
@@ -89,10 +89,12 @@ public class TeamService {
     @Transactional
     public Team updateTeam(Integer id, PostTeamDTO postTeamDTO) {
         Team updatedTeam = teamRepository.findById(id).get();
-        Stadium stadium = stadiumRepository.findStadiumByStadiumNameIgnoreCase(postTeamDTO.getTeamStadium());
-        updatedTeam.setTeamName(postTeamDTO.getTeamName());
-        updatedTeam.setStadium(stadium);
+        Stadium stadium = stadiumRepository.findStadiumByStadiumNameContainingIgnoreCase(updatedTeam.getStadium().getStadiumName());
 
+        updatedTeam.setTeamName(postTeamDTO.getTeamName());
+        stadium.setStadiumName(postTeamDTO.getTeamStadium());
+        updatedTeam.setStadium(stadium);
+        int i = 1;
         return teamRepository.save(updatedTeam);
     }
 }

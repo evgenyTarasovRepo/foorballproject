@@ -8,9 +8,9 @@ import com.tarasov.footballproject.entities.Player;
 import com.tarasov.footballproject.entities.Team;
 import com.tarasov.footballproject.repositores.PlayerRepository;
 import com.tarasov.footballproject.repositores.TeamRepository;
-import com.tarasov.footballproject.utils.AssistantDTOMapper;
-import com.tarasov.footballproject.utils.PlayerDTOMapper;
-import com.tarasov.footballproject.utils.ScorerDTOMapper;
+import com.tarasov.footballproject.mappers.AssistantDTOMapper;
+import com.tarasov.footballproject.mappers.PlayerDTOMapper;
+import com.tarasov.footballproject.mappers.ScorerDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,7 +109,7 @@ public class PlayerService {
     }
 
     private Team getTeamByName(String teamName) {
-        return teamRepository.findTeamByTeamNameIgnoreCase(teamName).get();
+        return teamRepository.findTeamByTeamNameContainingIgnoreCase(teamName).get();
     }
 
     private Player constructPlayer(PostPlayerDTO postPlayerDTO) {

@@ -1,4 +1,4 @@
-package com.tarasov.footballproject.utils;
+package com.tarasov.footballproject.mappers;
 
 import com.tarasov.footballproject.dto.get.GetFullTeamInfoDTO;
 import com.tarasov.footballproject.entities.Team;
